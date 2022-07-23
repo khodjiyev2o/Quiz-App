@@ -1,4 +1,4 @@
-from pickle import TRUE
+from pickle import FALSE, TRUE
 from django.db import models
 
 # Create your models here.
@@ -8,23 +8,24 @@ from django.db import models
 
 
 class Question(models.Model):
-    text = models.CharField(max_length=30)
+    question = models.CharField(max_length=250)
     @property
     def get_answers(self):
         return self.choice_set.all()
 
     def __str__(self):
-        return self.text
+        return self.question
 
 class Choice(models.Model):
-    text = models.CharField(max_length=30)
+    option = models.CharField(max_length=30)
     correct = models.BooleanField(default=False) 
-    question = models.ForeignKey(Question,on_delete=models.CASCADE,related_name='choices')
+    question = models.ForeignKey(Question,on_delete=models.CASCADE,related_name='options')
     def __str__(self):
-        return self.text
+        return self.option
 
 class Creator(models.Model):
-    username = models.CharField(unique=True,max_length=30)
+    username = models.CharField(max_length=30)
+   
     def __str__(self):
         return str(self.username)
 class Quiz(models.Model):
@@ -36,3 +37,7 @@ class Quiz(models.Model):
    
     class Meta:
          verbose_name_plural = "Quizzes"
+
+class Result(models.Model):
+    score = models.IntegerField(blank=False)
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

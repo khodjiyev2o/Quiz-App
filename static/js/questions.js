@@ -1,4 +1,56 @@
 // creating an array and passing the number, questions, options, and answers
+
+
+
+ 
+
+
+      
+var url = 'http://127.0.0.1:8000/api/questions';
+     const everything = async function getData(){
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        var arr = []
+        const questionss = data.map((question) => {
+          
+          return {
+            numb: question.id,
+            question: question.question,
+            answer : '',
+            options: [],
+             
+            
+          
+          }
+          });
+          
+          for(i=0;i<data.length;i++){
+            var arr=[]
+            data[i].options.map((values)=>{
+              
+              if(values.correct==true){
+                questionss[i].answer = values.option
+              }
+              questionss[i].options.push(values.option)
+             
+              return arr
+            })
+           
+            
+          }
+          
+         
+          return questionss
+        };
+       
+     
+
+everything().then((res)=>
+  console.log(res)
+);
+
+
 let questions = [
     {
     numb: 1,
@@ -12,7 +64,7 @@ let questions = [
     ]
   },
     {
-    numb: 2,
+      numb: 2,
     question: "What does CSS stand for?",
     answer: "Cascading Style Sheet",
     options: [
@@ -23,7 +75,7 @@ let questions = [
     ]
   },
     {
-    numb: 3,
+      numb: 3,
     question: "What does PHP stand for?",
     answer: "Hypertext Preprocessor",
     options: [
@@ -34,7 +86,7 @@ let questions = [
     ]
   },
     {
-    numb: 4,
+      numb: 4,
     question: "What does SQL stand for?",
     answer: "Structured Query Language",
     options: [
@@ -45,7 +97,7 @@ let questions = [
     ]
   },
     {
-    numb: 5,
+      numb: 5,
     question: "What does XML stand for?",
     answer: "eXtensible Markup Language",
     options: [
@@ -70,3 +122,5 @@ let questions = [
   //   ]
   // },
 ];
+
+console.log(questions)

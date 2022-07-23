@@ -29,16 +29,19 @@ class QuestionSerializer(serializers.ModelSerializer):
 """
 
 
-
+class CreatorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Creator
+        fields = ('id','username')
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
-        fields = "__all__"
+        fields = ('option','correct')
 
 class QuestionSerializer(serializers.ModelSerializer):
-    choices = ChoiceSerializer(many=True, read_only=False)
+    options = ChoiceSerializer(many=True, read_only=False)
 
     class Meta:
         model = Question
-        fields = ('id','text','choices')
+        fields = ('id','question','options')
