@@ -62,7 +62,7 @@ restart_quiz.onclick = ()=>{
 
 // if quitQuiz button clicked
 quit_quiz.onclick = ()=>{
-    window.location.reload(); //reload the current window
+    location.href = `http://127.0.0.1:8000/quiz_list`; //reload the current window
 }
 
 const next_btn = document.querySelector("footer .next_btn");
