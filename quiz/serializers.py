@@ -1,5 +1,5 @@
 from secrets import choice
-from .models import Choice,Question,Quiz,Creator
+from .models import Choice,Question,Quiz,Creator,Result
 
 from rest_framework import serializers
 
@@ -27,7 +27,10 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = '__all__'
 """
-
+class ResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Result
+        fields = '__all__'
 
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:

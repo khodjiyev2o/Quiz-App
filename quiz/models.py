@@ -1,4 +1,4 @@
-from pickle import FALSE, TRUE
+
 from django.db import models
 
 # Create your models here.
@@ -40,4 +40,5 @@ class Quiz(models.Model):
 
 class Result(models.Model):
     score = models.IntegerField(blank=False)
+    user = models.CharField(max_length=250)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

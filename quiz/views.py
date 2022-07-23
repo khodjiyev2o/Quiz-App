@@ -1,8 +1,8 @@
 from urllib import response
 from django.db import IntegrityError
 from django.shortcuts import render,redirect
-from .models import Quiz,Question,Choice,Creator
-from .serializers import QuestionSerializer,CreatorSerializer
+from .models import Quiz,Question,Choice,Creator,Result
+from .serializers import QuestionSerializer,CreatorSerializer,ResultSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from quiz import serializers
@@ -14,7 +14,7 @@ def index(request,username):
     creator = Creator.objects.filter(username=username).first()
     quiz = Quiz.objects.filter(creator=creator).select_related('creator').prefetch_related('question')
     return render(request,'quiz/index.html',{'quiz':quiz,'username':username})
-
+    
 def names(request):
     return render(request,'quiz/names.html',{})
 
@@ -44,4 +44,28 @@ class CreatorCreateApiView(generics.CreateAPIView,generics.ListAPIView):
             'This username already exists,choose another one!'    
         except IntegrityError:
             return render(request, 'quiz/names.html', {'message':'This username already exists,choose another one!'}) 
+
+
+class ResultCreateApiView(generics.CreateAPIView,generics.ListAPIView):
+    queryset =  Result.objects.all()
+    serializer_class = ResultSerializer
+
+    def post(self,request,*args,**kwargs):
+        data = request.data
+        user = data['user']
+        score = data['score']
+        
+        quiz = Quiz.objects.first()
        
+        obj, created = Result.objects.update_or_create(
+        user=user, quiz=quiz,
+        defaults={'score': score},
+    )
+        
+
+        return Response("hi")
+
+    
+
+       
+    

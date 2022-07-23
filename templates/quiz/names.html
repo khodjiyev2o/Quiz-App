@@ -119,6 +119,19 @@ html,body{
          </div>
       </div>
       <script>
+
+        window.onload = function() {
+  
+
+        // Retrieve the users name.
+        var name = localStorage.getItem('name');
+
+        if (name != "undefined" || name != "null") {
+           
+            location.href = `http://127.0.0.1:8000/index/${name}/quiz`;
+        } 
+            };
+
         function getCookie(name) {
 		    var cookieValue = null;
 		    if (document.cookie && document.cookie !== '') {
@@ -140,7 +153,9 @@ html,body{
 	    btn.addEventListener('click', function(){
         username = names.value
         userRegister(username);
-        location.href = `http://127.0.0.1:8000/index/${username}/quiz/`;
+        if(localStorage)
+        localStorage.setItem('name', username);
+        location.href = `http://127.0.0.1:8000/index/${username}/quiz`;
       })
      
 

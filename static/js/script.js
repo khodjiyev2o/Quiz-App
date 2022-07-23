@@ -10,6 +10,25 @@ const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
+
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
 // if startQuiz button clicked
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
@@ -150,6 +169,7 @@ function showResult(){
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
+
     if (userScore > 3){ // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
         let scoreTag = '<span>and congrats! , You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
@@ -163,6 +183,34 @@ function showResult(){
         let scoreTag = '<span>and sorry , You got only <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
         scoreText.innerHTML = scoreTag;
     }
+    function result(user,score){
+	    
+        console.log(user + " solved test   "  + "and found "+score)
+            var url = 'http://127.0.0.1:8000/api/results'
+        
+          fetch(url, {
+              method:'POST',
+              headers:{
+                  'Content-Type':'application/json',
+                  'X-CSRFToken':csrftoken,
+              },
+              body:JSON.stringify({'user':user,'score':score})
+          })
+          .then((response) => {
+                  if (!response.ok) {
+                      // error processing
+                      throw 'Error';
+                  }
+                  return response.json()
+              })
+          .then((data) => {
+              
+          });
+  }
+        var user = localStorage.getItem('name')
+        result(user,userScore)
+
+
 }
 
 function startTimer(time){
