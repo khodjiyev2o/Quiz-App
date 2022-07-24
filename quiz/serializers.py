@@ -1,5 +1,5 @@
 from secrets import choice
-from .models import Choice,Question,Quiz,Creator,Result
+from .models import Choice,Question,Quiz,Creator,Result, Visitor
 
 from rest_framework import serializers
 
@@ -34,8 +34,8 @@ class ResultSerializer(serializers.ModelSerializer):
 
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Creator
-        fields = ('id','username')
+        model = Visitor
+        fields = ('id','visitor')
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:

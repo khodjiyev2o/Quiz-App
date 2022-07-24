@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Choice,Question,Quiz,Creator,Result
+
+from .models import Choice, Creator, Question, Quiz, Result, Visitor
+
 # Register your models here.
 
 
@@ -14,4 +16,4 @@ admin.site.register(Question,QuestionAdmin)
 admin.site.register(Quiz)
 admin.site.register(Creator)
 admin.site.register(Result)
-
+admin.site.register(Visitor)

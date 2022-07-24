@@ -1,12 +1,16 @@
 from urllib import response
+
 from django.db import IntegrityError
-from django.shortcuts import render,redirect
-from .models import Quiz,Question,Choice,Creator,Result
-from .serializers import QuestionSerializer,CreatorSerializer,ResultSerializer
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from quiz import serializers
+from django.shortcuts import redirect, render
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from quiz import serializers
+
+from .models import Choice, Creator, Question, Quiz, Result,Visitor
+from .serializers import (CreatorSerializer, QuestionSerializer,
+                          ResultSerializer)
 
 # Create your views here.
 
@@ -46,7 +50,7 @@ class CreatorCreateApiView(generics.CreateAPIView,generics.ListAPIView):
         username = data['username']
         print(username)
         try:
-            Creator.objects.create(username=username)
+            Visitor.objects.create(visitor=username)
             'This username already exists,choose another one!'    
         except IntegrityError:
             return render(request, 'quiz/names.html', {'message':'This username already exists,choose another one!'}) 
