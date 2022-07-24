@@ -2,8 +2,9 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('index/<str:username>/quiz',views.index,name='index'),
+    path('index/quiz',views.index,name='index'),
     path('quiz_list',views.quiz_list,name='quiz_list'),
+    path('results',views.results,name='results'),
     path('api/questions',views.api_questions),
     path('api/creators',views.CreatorCreateApiView.as_view()),
     path('api/results',views.ResultCreateApiView.as_view()),

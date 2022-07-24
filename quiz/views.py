@@ -10,13 +10,19 @@ from rest_framework import generics
 
 # Create your views here.
 
-def index(request,username):
-    creator = Creator.objects.filter(username=username).first()
-    quiz = Quiz.objects.filter(creator=creator).select_related('creator').prefetch_related('question')
-    return render(request,'quiz/index.html',{'quiz':quiz,'username':username})
+def index(request):
+    quiz = Quiz.objects.filter(id=1).select_related('creator').prefetch_related('question')
+    return render(request,'quiz/index.html',{'quiz':quiz})
     
+
 def names(request):
     return render(request,'quiz/names.html',{})
+
+
+def results(request):
+    results = Result.objects.select_related('quiz').order_by('-score').filter(quiz=1)
+    return render(request,'quiz/result.html',{'results':results})
+
 
 @api_view(['GET'])
 def api_questions(reqest):
@@ -45,6 +51,7 @@ class CreatorCreateApiView(generics.CreateAPIView,generics.ListAPIView):
         except IntegrityError:
             return render(request, 'quiz/names.html', {'message':'This username already exists,choose another one!'}) 
 
+        return Response("done")
 
 class ResultCreateApiView(generics.CreateAPIView,generics.ListAPIView):
     queryset =  Result.objects.all()

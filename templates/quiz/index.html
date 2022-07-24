@@ -19,9 +19,9 @@
     padding: 61px;
     box-shadow: none;
     color: blanchedalmond;
-    font-size:20px;
+    font-size:16px;
     font-family: inherit;
-    white-space: nowrap;">Welcome,This quiz is created by {{username}}</h4>
+    white-space: nowrap;">Welcome,This quiz is created by Khodjiyev Samandar</h4>
         <button>Start Quiz</button>
     </div>
     
@@ -44,7 +44,7 @@
     <!-- Quiz Box -->
     <div class="quiz_box">
         <header>
-            <div class="title">Awesome Quiz Application</div>
+            <div class="title">How well do you know Samandar?</div>
             <div class="timer">
                 <div class="time_left_txt">Time Left</div>
                 <div class="timer_sec">15</div>
@@ -74,7 +74,11 @@
         <div class="icon">
             <i class="fas fa-crown"></i>
         </div>
-        <div class="complete_text">You've completed the Quiz!</div>
+        <div class="complete_text">You've completed the Quiz!<a style="
+            text-decoration: auto;
+            font-size: inherit;
+            color:#007bff;
+        " href="{%url 'results'%}">See results</a></div>
         <div class="score_text">
             <!-- Here I've inserted Score Result from JavaScript -->
         </div>
@@ -89,12 +93,10 @@
 
     <!-- Inside this JavaScript file I've coded all Quiz Codes -->
     <script src="{% static 'js/script.js' %}">
-         var quiz_creator = "{{username}}"
-        console.log(quiz_creator)
+        
     </script>
     <script>
-    var quiz_creator = "{{username}}"
-    console.log(quiz_creator)
+   
     </script>
    
 </body>

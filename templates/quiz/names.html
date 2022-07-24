@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>Animated Subscribe Button | CodingNepal</title>
+      <title>Samandar Quiz</title>
       <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 *{
@@ -121,16 +121,13 @@ html,body{
       <script>
 
         window.onload = function() {
-  
+            if (localStorage.getItem('name') === undefined || localStorage.getItem('name') === null){
+                console.log("empty")
+            }else{
+            console.log("name is here")
+            location.href = `http://127.0.0.1:8000/index/quiz`
 
-        // Retrieve the users name.
-        var name = localStorage.getItem('name');
-
-        if (name != "undefined" || name != "null") {
-           
-            location.href = `http://127.0.0.1:8000/index/${name}/quiz`;
-        } 
-            };
+         } };
 
         function getCookie(name) {
 		    var cookieValue = null;
@@ -155,7 +152,7 @@ html,body{
         userRegister(username);
         if(localStorage)
         localStorage.setItem('name', username);
-        location.href = `http://127.0.0.1:8000/index/${username}/quiz`;
+        location.href = `http://127.0.0.1:8000/index/quiz`;
       })
      
 

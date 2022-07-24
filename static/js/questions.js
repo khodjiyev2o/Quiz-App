@@ -54,73 +54,73 @@ everything().then((res)=>
 let questions = [
     {
     numb: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
+    question: "Is Samandar single or taken? ",
+    answer: "Single",
     options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
+      "Single",
+      "Taken",
+      "Married",
+      "Do not know"
     ]
   },
     {
       numb: 2,
-    question: "What does CSS stand for?",
-    answer: "Cascading Style Sheet",
+    question: "What is Samandar's favorite color?",
+    answer: "Blue",
     options: [
-      "Common Style Sheet",
-      "Colorful Style Sheet",
-      "Computer Style Sheet",
-      "Cascading Style Sheet"
+      "Red",
+      "Blue",
+      "Black",
+      "White"
     ]
   },
     {
       numb: 3,
-    question: "What does PHP stand for?",
-    answer: "Hypertext Preprocessor",
+    question: "Samandar has never ever...",
+    answer: "Dropped his/her cellphone in the toilet",
     options: [
-      "Hypertext Preprocessor",
-      "Hypertext Programming",
-      "Hypertext Preprogramming",
-      "Hometext Preprocessor"
+      "Slept for 12 hours",
+      "Broken a bone",
+      "Dropped his/her cellphone in the toilet",
+      "Ate a whole pizza by himself"
     ]
   },
     {
       numb: 4,
-    question: "What does SQL stand for?",
-    answer: "Structured Query Language",
+    question: "Who is Samandar's favorite, Mom or Dad?",
+    answer: "Both",
     options: [
-      "Stylish Question Language",
-      "Stylesheet Query Language",
-      "Statement Question Language",
-      "Structured Query Language"
+      "Mom",
+      "Dad",
+      "Both",
+      "Do not know"
     ]
   },
     {
       numb: 5,
-    question: "What does XML stand for?",
-    answer: "eXtensible Markup Language",
+    question: "How many schools has Samandar gone to?",
+    answer: "1",
     options: [
-      "eXtensible Markup Language",
-      "eXecutable Multiple Language",
-      "eXTra Multi-Program Language",
-      "eXamine Multiple Language"
+      "1",
+      "2",
+      "3",
+      "4"
     ]
   },
   // you can uncomment the below codes and make duplicate as more as you want to add question
   // but remember you need to give the numb value serialize like 1,2,3,5,6,7,8,9.....
 
-  //   {
-  //   numb: 6,
-  //   question: "Your Question is Here",
-  //   answer: "Correct answer of the question is here",
-  //   options: [
-  //     "Option 1",
-  //     "option 2",
-  //     "option 3",
-  //     "option 4"
-  //   ]
-  // },
+     {
+    numb: 6,
+    question: " How old is Samandar?",
+    answer: "18",
+    options: [
+     "17",
+    "18",
+    "19",
+    "20"
+     ]
+   },
 ];
 
 console.log(questions)
