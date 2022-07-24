@@ -1,6 +1,6 @@
 
 from django.db import models
-
+from django.db.models import Sum
 # Create your models here.
 
 
@@ -42,7 +42,9 @@ class Result(models.Model):
     score = models.IntegerField(blank=False)
     user = models.CharField(max_length=250)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,default=1)
-
+    @property
+    def better_then(self):
+        return self.objects.aggregate(Sum(self.user))
 class Visitor(models.Model):
     visitor =  models.CharField(max_length=250)
 

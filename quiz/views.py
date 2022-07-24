@@ -1,13 +1,13 @@
 from urllib import response
-
+from django.db.models import Sum,Max
 from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from django.db.models import Q
 from quiz import serializers
-
+from django.db.models import Count
 from .models import Choice, Creator, Question, Quiz, Result,Visitor
 from .serializers import (CreatorSerializer, QuestionSerializer,
                           ResultSerializer)
@@ -25,6 +25,14 @@ def names(request):
 
 def results(request):
     results = Result.objects.select_related('quiz').order_by('-score').filter(quiz=1)
+    max_score = Result.objects.aggregate(Max('score'))
+    
+    """ for result in results:
+        user_score = result.score
+        highly_rated = Count('user', filter=Q(score__gt=user_score))
+        lower_users = Result.objects.annotate(num_users=Count('user'), highly_rated_users=highly_rated)
+        print(results.num_users)"""
+
     return render(request,'quiz/result.html',{'results':results})
 
 
