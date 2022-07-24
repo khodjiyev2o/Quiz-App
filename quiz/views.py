@@ -40,7 +40,7 @@ def quiz_list(request):
     return render(request,'quiz/quiz_list.html',{'quizzes':quizzes})
 
 class CreatorCreateApiView(generics.CreateAPIView,generics.ListAPIView):
-    queryset =  Creator.objects.all()
+    queryset =  Visitor.objects.all()
     serializer_class = CreatorSerializer
 
 

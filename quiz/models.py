@@ -41,7 +41,10 @@ class Quiz(models.Model):
 class Result(models.Model):
     score = models.IntegerField(blank=False)
     user = models.CharField(max_length=250)
-    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,default=1)
 
 class Visitor(models.Model):
     visitor =  models.CharField(max_length=250)
+
+    def __str__(self):
+        return str(self.visitor)

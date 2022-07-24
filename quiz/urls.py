@@ -6,7 +6,7 @@ urlpatterns = [
     path('quiz_list',views.quiz_list,name='quiz_list'),
     path('results',views.results,name='results'),
     path('api/questions',views.api_questions),
-    path('api/visitors',views.CreatorCreateApiView.as_view()),
-    path('api/results',views.ResultCreateApiView.as_view()),
+    path('api/visitors',views.CreatorCreateApiView.as_view(),name="visitors"),
+    path('api/results',views.ResultCreateApiView.as_view(),name="results"),
     path('',views.names,name='names'),
 ]
