@@ -25,13 +25,12 @@ def names(request):
 
 def results(request):
     results = Result.objects.select_related('quiz').order_by('-score').filter(quiz=1)
+    
     max_score = Result.objects.aggregate(Max('score'))
     
-    """ for result in results:
+    for result in results:
         user_score = result.score
-        highly_rated = Count('user', filter=Q(score__gt=user_score))
-        lower_users = Result.objects.annotate(num_users=Count('user'), highly_rated_users=highly_rated)
-        print(results.num_users)"""
+        print(result.passed_or_failed)
 
     return render(request,'quiz/result.html',{'results':results})
 
@@ -73,12 +72,12 @@ class ResultCreateApiView(generics.CreateAPIView,generics.ListAPIView):
         data = request.data
         user = data['user']
         score = data['score']
-        
+        q_length = data['q_length']
         quiz = Quiz.objects.first()
        
         obj, created = Result.objects.update_or_create(
         user=user, quiz=quiz,
-        defaults={'score': score},
+        defaults={'score': score,'q_length': q_length},
     )
         
 

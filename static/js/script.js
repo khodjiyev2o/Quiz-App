@@ -183,9 +183,11 @@ function showResult(){
         let scoreTag = '<span>and sorry , You got only <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
         scoreText.innerHTML = scoreTag;
     }
-    function result(user,score){
+    q_length = questions.length
+    function result(user,score,q_length){
 	    
-        console.log(user + " solved test   "  + "and found "+score)
+        console.log(user + " solved test   "  + "and found "+score+"out of " + q_length) 
+
             var url = 'http://127.0.0.1:8000/api/results'
         
           fetch(url, {
@@ -194,7 +196,7 @@ function showResult(){
                   'Content-Type':'application/json',
                   'X-CSRFToken':csrftoken,
               },
-              body:JSON.stringify({'user':user,'score':score})
+              body:JSON.stringify({'user':user,'score':score,"q_length":q_length})
           })
           .then((response) => {
                   if (!response.ok) {
@@ -208,7 +210,7 @@ function showResult(){
           });
   }
         var user = localStorage.getItem('name')
-        result(user,userScore)
+        result(user,userScore,questions)
 
 
 }

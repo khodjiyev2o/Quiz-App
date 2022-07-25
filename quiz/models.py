@@ -42,9 +42,18 @@ class Result(models.Model):
     score = models.IntegerField(blank=False)
     user = models.CharField(max_length=250)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,default=1)
+    question_length = models.IntegerField(max_length=50)
+    
+    def __str__(self):
+        return f"user : {self.user}   scored  {self.score} out of {self.question_length}" 
+
     @property
-    def better_then(self):
-        return self.objects.aggregate(Sum(self.user))
+    def passed_or_failed(self):
+        if self.score>self.question_length*0.6:
+            return True
+        else:
+            return False
+            
 class Visitor(models.Model):
     visitor =  models.CharField(max_length=250)
 

@@ -276,7 +276,7 @@ td {
         <th class="rank"></th>
         <th class="nick">Username</th>
         <th class="sp">Score</th>
-        <th class="kd">Better than %</th>
+        <th class="kd">Result</th>
       </tr>
     </thead>
     <tbody>
@@ -285,7 +285,13 @@ td {
         <td class="rank">{{ forloop.counter }}</td>
         <td class="nick">{{result.user}}</td>
         <td class="sp">{{result.score}}</td>
-        <td class="kd"></td>
+        <td class="kd">
+          {%if result.passed_or_failed == True%}
+          Passed
+          {%else%}
+          Failed
+          {%endif%}
+        </td>
       </tr>
       {%endfor%}
     </tbody>
