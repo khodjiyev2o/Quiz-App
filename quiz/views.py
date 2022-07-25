@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.db.models import Q
 from quiz import serializers
-from django.db.models import Count
+from django.db.models import Count,Case,When
 from .models import Choice, Creator, Question, Quiz, Result,Visitor
 from .serializers import (CreatorSerializer, QuestionSerializer,
                           ResultSerializer)
@@ -24,13 +24,12 @@ def names(request):
 
 
 def results(request):
-    results = Result.objects.select_related('quiz').order_by('-score').filter(quiz=1)
+    results = Result.objects.select_related('quiz').order_by('-score')
     
     max_score = Result.objects.aggregate(Max('score'))
+ 
     
-    for result in results:
-        user_score = result.score
-        print(result.passed_or_failed)
+        
 
     return render(request,'quiz/result.html',{'results':results})
 
@@ -77,7 +76,7 @@ class ResultCreateApiView(generics.CreateAPIView,generics.ListAPIView):
        
         obj, created = Result.objects.update_or_create(
         user=user, quiz=quiz,
-        defaults={'score': score,'q_length': q_length},
+        defaults={'score': score,'question_length': q_length},
     )
         
 

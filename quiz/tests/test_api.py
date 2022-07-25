@@ -39,11 +39,15 @@ class TestApi(APITestCase):
     
 
     def test_results_api(self):
-        data= {'user':'me','score':'5','quiz': self.quiz}
+        Result.objects.create(score='5',quiz=self.quiz,question_length=6,user='me')
+        data= {'user':'me','score':'4','quiz': self.quiz,'q_length': '6'}
         response = self.client.post(self.results_api_url,data)
-        result = Result.objects.get(score=5)
+        result = Result.objects.get(score='5')
         self.assertEqual(Result.objects.count(),1)
         self.assertEqual(result.score,5)
         self.assertEqual(result.user,"me")
         self.assertEquals(response.status_code,200)
-            
+
+
+    
+    

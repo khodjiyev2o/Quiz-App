@@ -69,6 +69,7 @@ body{
 	padding: 10px 20px;
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
 }
 
 .list-view .view_item:last-child{
@@ -126,10 +127,131 @@ body{
 .grid-view .view_item .btn{
 	margin: 0 auto;
 }
+.button {
+  display: flex;
+  height: 50px;
+  padding: 0;
+  background: #009578;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #008168;
+}
+
+.button:active {
+  background: #006e58;
+}
+
+.button__text,
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  color: #fff;
+  height: 100%;
+}
+
+.button__icon {
+  font-size: 1.5em;
+  background: rgba(0, 0, 0, 0.08);
+}
+.popup-window {
+  width: 450px;
+  height: 340px;
+  transition: all 0.3s ease;
+  position: absolute;
+  background: #fff;
+  border-radius: 6px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: -1px -2px 24px 5px rgba(0, 0, 0, 0.43);
+}
+
+.popup-window.active {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 9999;
+}
+
+.name-input {
+  border-bottom: 1px solid #000;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  width: 220px;
+}
+
+.fa-times {
+  font-size: 18px;
+}
+
+.name-input {
+  margin-top: 50px;
+  display: block;
+}
+.close-btn {
+  cursor: pointer;
+  background: #fff;
+  border: 0;
+  float: right;
+  margin: 15px 15px 0 0;
+}
+
+.submit {
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 15px;
+  margin: 25px auto;
+  border: 0;
+  display: block;
+  background: #198754;
+  border-radius: 6px;
+  transition: all 0.5s ease;
+}
+
+.submit:hover {
+  background: #20c997;
+}
+
+.popup-body {
+  display: flex;
+  flex-direction: column;
+  max-width: 62%;
+  margin: 37px auto;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.popup-title {
+  font-size: 30px;
+  font-weight: 600;
+}
     </style>
 </head>
 <body>
-
+	<div class="popup-window">
+		<button class="close-btn">
+		  <i class="fas fa-times"></i>
+		</button>
+		<div class="popup-body">
+		  <h1 class="popup-title">Quiz creation part is in the process!</h1></br>
+			<h3> It will be released soon,Sabr!</h3></br>
+			
+			<a   type="submit" class="submit">Ok</a>
+		  
+		</div>
+	  </div>
 <div class="wrapper">
 	<div class="links">
 		<ul>
@@ -152,7 +274,17 @@ body{
 					<p class="title">Quiz# : {{quiz.id}}</p>
 					<p class="content">This quiz was created by {{quiz.creator}}!</p>
 					<a href="{%url 'names'     %}" class="btn">Solve</a>
+					<a href="{%url 'results'     %}" class="btn btn-success">Results</a>
 				</div>
+				
+				<a type="button" class="button"  style="text-decoration: none;">
+					<span class="button__text">Create a Quiz</span>
+					<span class="button__icon">
+					
+					<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"  role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/></g></svg>
+						
+				</span>
+			</a>
 			</div>
             {%endfor%}
 		</div>
@@ -168,7 +300,9 @@ body{
 					<p class="title">Quiz# : {{quiz.id}}</p>
 					<p class="content">This quiz was created by {{quiz.creator}}!</p>
 					<a href="{%url 'names' %}" class="btn">Solve</a>
+					<a href="{%url 'results'     %}" class="btn btn-success">Results</a>
 				</div>
+				
 			</div>
             {%endfor%}
 
@@ -202,7 +336,31 @@ body{
                 grid_view.style.display = "block";
             }
         })
-    })</script>
 
+
+
+
+
+
+		const popupWindow = document.querySelector(".popup-window");
+		const btn_create =document.querySelector(".button");
+		btn_create.addEventListener("click", () => {
+	popupWindow.classList.add("active");
+});
+
+const closeWindow = document.querySelector(".close-btn");
+const ok_btn = document.querySelector(".submit");
+closeWindow.addEventListener("click", () => {
+  popupWindow.classList.remove("active");
+
+});
+
+ok_btn.addEventListener("click", () => {
+  popupWindow.classList.remove("active");
+
+});
+
+    })</script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@ class Result(models.Model):
     score = models.IntegerField(blank=False)
     user = models.CharField(max_length=250)
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,default=1)
-    question_length = models.IntegerField(max_length=50)
+    question_length = models.IntegerField()
     
     def __str__(self):
         return f"user : {self.user}   scored  {self.score} out of {self.question_length}" 
@@ -53,7 +53,7 @@ class Result(models.Model):
             return True
         else:
             return False
-            
+
 class Visitor(models.Model):
     visitor =  models.CharField(max_length=250)
 
