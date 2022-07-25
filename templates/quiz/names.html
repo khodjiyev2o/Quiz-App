@@ -125,7 +125,7 @@ html,body{
                 console.log("empty")
             }else{
             console.log("name is here")
-            location.href = `http://127.0.0.1:8000/index/quiz`
+            location.href = `https://khodjiyev2o-quiz-app.herokuapp.com/index/quiz`
 
          } };
 
@@ -152,12 +152,12 @@ html,body{
         userRegister(username);
         if(localStorage)
         localStorage.setItem('name', username);
-        location.href = `http://127.0.0.1:8000/index/quiz`;
+        location.href = `https://khodjiyev2o-quiz-app.herokuapp.com/index/quiz`;
       })
      
 
           function userRegister(username){
-        var url = 'http://127.0.0.1:8000/api/visitors'
+        var url = 'api/visitors'
 
       fetch(url, {
           method:'POST',
